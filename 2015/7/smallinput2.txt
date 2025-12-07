@@ -1,0 +1,4 @@
+lx -> a
+lw OR lv -> lx
+16 -> lw
+100 -> lv
