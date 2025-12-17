@@ -10,7 +10,19 @@ pairDetails = []
 for d in data:
     pairDetails.append(processInstruction(d))
 
-p = permutations(personList(data))
+people = personList(data)
+
+for person in people:
+    pairDetails.append(('ste',0,person))
+    pairDetails.append((person,0,'ste'))
+
+
+people.append("ste")
+
+print(people)
+print(pairDetails)
+
+p = permutations(people)
 p = list(p)
 
 highestHappiness = 0
@@ -20,5 +32,5 @@ for _ in p:
     if newHappiness > highestHappiness:
         highestHappiness = newHappiness
 
-#664
+
 print(highestHappiness)
