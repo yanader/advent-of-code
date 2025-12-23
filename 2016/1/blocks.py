@@ -1,7 +1,8 @@
 with open('input.txt', 'r') as file:
     data = [line.strip() for line in file.read().split(",")]
 
-postition = ['N',0,0]
+position = ['N',0,0] # Direction, X, Y
+visited = [[0,0]]
 
 def turn(facing, turning):
     if facing == "N" and turning == "L": return "W"
@@ -13,25 +14,48 @@ def turn(facing, turning):
     if facing == "W" and turning == "L": return "S"
     if facing == "W" and turning == "R": return "N"
 
+def move(position, move, visited):
+    ...
 
-visited = [[0,0]]
-
+#  The problem to solve here is that I am visiting a site as I step square by square but the below doesn't capture that
+    
 for move in data:
-    postition[0] = turn(postition[0], move[0])
-    if postition[0] == "N":
-        postition[1] += int(move[1:])
-    if postition[0] == "S":
-        postition[1] -= int(move[1:])
-    if postition[0] == "E":
-        postition[2] += int(move[1:])
-    if postition[0] == "W":
-        postition[2] -= int(move[1:])
-    location = int(postition[1]),int(postition[2])
-    print(location)
-    if [location] in visited:
-        break
-    else:
-        visited.append([location])
+    position[0] = turn(position[0], move[0])
+    if position[0] == "N":
+        for i in range(int(move[1:])):
+            position[1] += 1
+            newLocation = [position[1],position[2]]
+            if newLocation in visited:
+                print(newLocation)
+                break
+            else:
+                visited.append(newLocation)
+    if position[0] == "S":
+        for i in range(int(move[1:])):
+            position[1] -= 1
+            newLocation = [position[1],position[2]]
+            if newLocation in visited:
+                print(newLocation)
+                break
+            else:
+                visited.append(newLocation)
+    if position[0] == "E":
+        for i in range(int(move[1:])):
+            position[2] += 1
+            newLocation = [position[1],position[2]]
+            if newLocation in visited:
+                print(newLocation)
+                break
+            else:
+                visited.append(newLocation)
+    if position[0] == "W":
+        for i in range(int(move[1:])):
+            position[2] -= 1
+            newLocation = [position[1],position[2]]
+            if newLocation in visited:
+                print(newLocation)
+                break
+            else:
+                visited.append(newLocation)
 
-print(postition)
-print(abs(postition[1]) + abs(postition[2]))
+
